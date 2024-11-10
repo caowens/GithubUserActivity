@@ -15,6 +15,11 @@ namespace GithubUserActivity
 
             // # https://api.github.com/users/<username>/events
             // # Example: https://api.github.com/users/kamranahmedse/events
+            
+            if (args.Length < 1)
+            {
+                throw new Exception("Please give a username.");
+            }
 
             await ProcessEventsAsync(client, args[0]);
         }
