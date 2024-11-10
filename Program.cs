@@ -9,21 +9,24 @@ namespace GithubUserActivity
         {
             using HttpClient client = new();
             client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(
-                new MediaTypeWithQualityHeaderValue("application/vnd.github.v3+json"));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/vnd.github+json"));
             client.DefaultRequestHeaders.Add("User-Agent", ".NET Foundation Repository Reporter");
+            client.DefaultRequestHeaders.Add("X-GitHub-Api-Version", "2022-11-28");
 
-            await ProcessRepositoriesAsync(client);
+            // # https://api.github.com/users/<username>/events
+            // # Example: https://api.github.com/users/kamranahmedse/events
+
+            await ProcessEventsAsync(client, args[0]);
         }
 
-        static async Task ProcessRepositoriesAsync(HttpClient client)
+        static async Task ProcessEventsAsync(HttpClient client, string username)
         {
-            await using Stream stream = await client.GetStreamAsync("https://api.github.com/orgs/dotnet/repos");
-            var repositories = await JsonSerializer.DeserializeAsync<List<Repository>>(stream);
+            await using Stream stream = await client.GetStreamAsync($"https://api.github.com/users/{username}/events");
+            var events = await JsonSerializer.DeserializeAsync<List<Event>>(stream);
 
-            foreach (var repo in repositories ?? Enumerable.Empty<Repository>())
+            foreach (var e in events ?? Enumerable.Empty<Event>())
             {
-                Console.WriteLine(repo.name);
+                Console.WriteLine(e.type);
             }
         }
     }
