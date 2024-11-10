@@ -59,6 +59,15 @@ namespace GithubUserActivity
                     case "IssuesEvent":
                         Console.WriteLine($"- {e.payload.action} an issue in {e.repo.name}");
                         break;
+                    case "PullRequestReviewCommentEvent":
+                        Console.WriteLine($"- {e.payload.action} the following comment in {e.repo.name}: \"{e.payload.comment?.body}\"");
+                        break;
+                    case "PullRequestReviewEvent":
+                        Console.WriteLine($"- Reviewed a pull request in {e.repo.name}");
+                        break;
+                    case "ForkEvent":
+                        Console.WriteLine($"- Forked a repository in {e.payload.forkee?.full_name}");
+                        break;
                     default:
                         Console.WriteLine(e.type);
                         break;
