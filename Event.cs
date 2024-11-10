@@ -16,4 +16,12 @@ public class Repository
 public class Payload
 {
     public List<Object>? commits { get; set;}
+    public string? ref_type { get; set; }
+    public Comment? comment { get; set; }
+    public string? action { get; set; }
+}
+
+public class Comment 
+{
+    public string? body { get; set; }
 }
