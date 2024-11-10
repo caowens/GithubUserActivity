@@ -34,7 +34,7 @@ namespace GithubUserActivity
                 switch (e.type)
                 {
                     case "PushEvent":
-                        Console.WriteLine($"Pushed {e.payload.commits.Count} commit(s) to {e.repo.name}.");
+                        Console.WriteLine($"Pushed {e.payload.commits?.Count} commit(s) to {e.repo.name}.");
                         break;
                     default:
                         Console.WriteLine(e.type);

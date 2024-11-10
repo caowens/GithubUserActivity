@@ -2,18 +2,18 @@
 
 public class Event
 {
-    public string type { get; set; }
-    public Repository repo {get; set; }
-    public Payload payload { get; set;}
+    public required string type { get; set; }
+    public required Repository repo {get; set; }
+    public required Payload payload { get; set;}
 }
 
 public class Repository
 {
-    public string name { get; set;}
-    public string url { get; set;}
+    public required string name { get; set;}
+    public required string url { get; set;}
 }
 
 public class Payload
 {
-    public List<Object> commits { get; set;}
+    public List<Object>? commits { get; set;}
 }
