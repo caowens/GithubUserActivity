@@ -15,7 +15,7 @@ namespace GithubUserActivity
 
             // # https://api.github.com/users/<username>/events
             // # Example: https://api.github.com/users/kamranahmedse/events
-            
+
             if (args.Length < 1)
             {
                 throw new Exception("Please give a username.");
@@ -31,7 +31,15 @@ namespace GithubUserActivity
 
             foreach (var e in events ?? Enumerable.Empty<Event>())
             {
-                Console.WriteLine(e.type);
+                switch (e.type)
+                {
+                    case "PushEvent":
+                        Console.WriteLine($"Pushed {e.payload.commits.Count} commit(s) to {e.repo.name}.");
+                        break;
+                    default:
+                        Console.WriteLine(e.type);
+                        break;
+                }
             }
         }
     }
