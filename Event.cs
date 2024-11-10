@@ -1,5 +1,3 @@
-// public record class Event(string type);
-
 public class Event
 {
     public required string type { get; set; }
