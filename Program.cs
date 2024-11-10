@@ -40,10 +40,16 @@ namespace GithubUserActivity
                         Console.WriteLine($"- Starred {e.repo.name}");
                         break;
                     case "CreateEvent":
-                        Console.WriteLine($"- Created a {e.payload.ref_type} at {e.repo.name}");
+                        Console.WriteLine($"- Created a {e.payload.ref_type} in {e.repo.name}");
                         break;
                     case "IssueCommentEvent":
-                        Console.WriteLine($"- {e.payload.action} the comment \"{e.payload.comment?.body}\" at {e.repo.name}");
+                        Console.WriteLine($"- {e.payload.action} the comment \"{e.payload.comment?.body}\" in {e.repo.name}");
+                        break;
+                    case "PullRequestEvent":
+                        Console.WriteLine($"- {e.payload.action} a pull request with the title \"{e.payload.pull_request?.title}\" in {e.repo.name}");
+                        break;
+                    case "IssuesEvent":
+                        Console.WriteLine($"- {e.payload.action} an issue in {e.repo.name}");
                         break;
                     default:
                         Console.WriteLine(e.type);

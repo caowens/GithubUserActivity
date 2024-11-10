@@ -17,9 +17,15 @@ public class Payload
     public string? ref_type { get; set; }
     public Comment? comment { get; set; }
     public string? action { get; set; }
+    public PullRequest? pull_request {get; set;}
 }
 
 public class Comment 
 {
     public string? body { get; set; }
+}
+
+public class PullRequest
+{
+    public string? title { get; set;}
 }
