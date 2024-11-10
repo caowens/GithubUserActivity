@@ -20,6 +20,14 @@ namespace GithubUserActivity
             {
                 throw new Exception("Please give a username.");
             }
+            else if (args.Length == 2)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", args[1]);
+            }
+            else if (args.Length > 2)
+            {
+                throw new Exception("Wrong number of arguments. Please provide only 1 or 2 arguments, for username and OAuth token respectively.");
+            }
 
             await ProcessEventsAsync(client, args[0]);
         }
